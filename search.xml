@@ -8,7 +8,7 @@
       <link href="/penetrationtest/2023/07/articles/4c6ad3c1efab8e8e/"/>
       <url>/penetrationtest/2023/07/articles/4c6ad3c1efab8e8e/</url>
       
-        <content type="html"><![CDATA[<h2 id="漏洞起因"><a href="#漏洞起因" class="headerlink" title="漏洞起因"></a>漏洞起因</h2><ul><li>在Nacos集群处理部分Jraft请求时，攻击者可以无限制使用hessian进行反序列化利用，最终实现代码执行。Jraft通信端口默认7848。其中受影响版本<br/>1.4.0 <= Nacos < 1.4.6 <br/>2.0.0 <= Nacos < 2.2.3 <br/>这个漏洞的特点是不是直接使用http协议触发的漏洞。是用tcp Jraft 通信。神奇在于通过这个jraft 发送序列化的代码。直接注入web的内存马。这个漏洞比较新奇所以来复现一下</li></ul><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><ul><li>有漏洞的界面如下图:<p><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061705157.png" alt="界面"></p><p>存在Jraft 并且特征如下图:<br><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061708448.png" alt="漏洞特征"></p></li></ul><h2 id="工具复现"><a href="#工具复现" class="headerlink" title="工具复现"></a>工具复现</h2><ul><li>exp:https://github.com/c0olw/NacosRce/ 这个release 带着很多jar包。所以我们自己编译一个</li><li>结果<p><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061717273.png" alt="实战结果"></li></p></ul>]]></content>
+        <content type="html"><![CDATA[<h2 id="漏洞起因"><a href="#漏洞起因" class="headerlink" title="漏洞起因"></a>漏洞起因</h2><ul><li>在Nacos集群处理部分Jraft请求时，攻击者可以无限制使用hessian进行反序列化利用，最终实现代码执行。Jraft通信端口默认7848。其中受影响版本<br/>1.4.0 <= Nacos < 1.4.6 <br/>2.0.0 <= Nacos < 2.2.3 <br/>这个漏洞的特点是不是直接使用http协议触发的漏洞。是用tcp Jraft 通信。神奇在于通过这个jraft 发送序列化的代码。直接注入web的内存马。这个漏洞比较新奇所以来复现一下</li></ul><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><ul><li>有漏洞的界面如下图:<p><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061705157.png" alt="界面"></p><p>存在Jraft 并且特征如下图:<br><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061708448.png" alt="漏洞特征"></p></li></ul><h2 id="工具复现"><a href="#工具复现" class="headerlink" title="工具复现"></a>工具复现</h2><ul><li>exp:https://github.com/c0olw/NacosRce/ 这个release 带着很多jar包。所以我们自己编译一个下载地址 见频道</li><li>结果如下:<p><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307061717273.png" alt="实战结果"></li><br>brup成功特征。这个工具你如果执行cmd命令。那么自动给你注入cmd内存马我们在brup上执行一下<br><img src="https://cdn.jsdelivr.net/gh/peiqiF4ck/mybologimg/img/202307070955954.png" alt="brup复现执行结果"></p></ul>]]></content>
       
       
       <categories>
@@ -417,9 +417,9 @@
       
         <tags>
             
-            <tag> PenetrationTest </tag>
-            
             <tag> original </tag>
+            
+            <tag> PenetrationTest </tag>
             
         </tags>
       
